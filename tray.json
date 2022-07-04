@@ -1,58 +1,118 @@
 {
-  "type": "blinky-bus",
+  "type": "rfq-vacuum",
   "name": "01",
   "arcPeriod": 60000,
-  "timeStamp": 1649435680293,
-  "linkQuality": {
+  "timeStamp": 1656937306951,
+  "watchdog": {
     "action": "reading",
     "type": "scalar",
-    "value": 70,
-    "unit": "/70",
-    "alarm": {
-      "value": 0,
-      "limits": {
-        "lolo": -1,
-        "low": -1,
-        "high": 100,
-        "hihi": 100
-      },
-      "notify": {
-        "name": "",
-        "number": "",
-        "time": 0
-      }
-    }
-  },
-  "signalLevel": {
-    "action": "reading",
-    "type": "scalar",
-    "value": -25,
-    "unit": "dBm",
-    "alarm": {
-      "value": 0,
-      "limits": {
-        "lolo": -100,
-        "low": -100,
-        "high": 30,
-        "hihi": 30
-      },
-      "notify": {
-        "name": "",
-        "number": "",
-        "time": 0
-      }
-    }
-  },
-  "led1": {
-    "action": "setting",
-    "type": "scalar",
-    "unit": "unit",
+    "unit": "",
     "alarm": {
       "value": 0,
       "limits": {
         "lolo": 0,
-        "low": 0.5,
-        "high": 1.5,
+        "low": 0,
+        "high": 32760,
+        "hihi": 32760
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    },
+    "value": 22587
+  },
+  "gauge1": {
+    "action": "reading",
+    "type": "scalar",
+    "unit": "logPa",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -2,
+        "low": -1,
+        "high": 4,
+        "hihi": 5
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    },
+    "value": -0.089
+  },
+  "gauge2": {
+    "action": "reading",
+    "type": "scalar",
+    "unit": "logPa",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -2,
+        "low": -1,
+        "high": 4,
+        "hihi": 5
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    },
+    "value": -0.188
+  },
+  "gauge3": {
+    "action": "reading",
+    "type": "scalar",
+    "unit": "logPa",
+    "alarm": {
+      "value": 2,
+      "limits": {
+        "lolo": -6,
+        "low": -5,
+        "high": -4,
+        "hihi": -3
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    },
+    "value": -3.886
+  },
+  "gauge4": {
+    "action": "reading",
+    "type": "scalar",
+    "unit": "logPa",
+    "alarm": {
+      "value": 3,
+      "limits": {
+        "lolo": -6,
+        "low": -5,
+        "high": -4,
+        "hihi": -3
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    },
+    "value": -3.876
+  },
+  "turboSpeed1": {
+    "action": "reading",
+    "type": "scalar",
+    "unit": "unit",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -1,
+        "low": -1,
+        "high": 2,
         "hihi": 2
       },
       "notify": {
@@ -63,8 +123,8 @@
     },
     "value": 1
   },
-  "led2": {
-    "action": "setting",
+  "turboNoError1": {
+    "action": "reading",
     "type": "scalar",
     "unit": "unit",
     "alarm": {
@@ -83,10 +143,9 @@
     },
     "value": 1
   },
-  "led3": {
-    "action": "setting",
+  "turboSpeed2": {
+    "action": "reading",
     "type": "scalar",
-    "value": 1,
     "unit": "unit",
     "alarm": {
       "value": 0,
@@ -101,12 +160,12 @@
         "number": "",
         "time": 0
       }
-    }
+    },
+    "value": 1
   },
-  "nonModbusSetting": {
-    "action": "setting",
+  "turboNoError2": {
+    "action": "reading",
     "type": "scalar",
-    "value": 0,
     "unit": "unit",
     "alarm": {
       "value": 0,
@@ -121,6 +180,107 @@
         "number": "",
         "time": 0
       }
-    }
+    },
+    "value": 1
+  },
+  "gate1Open": {
+    "action": "reading",
+    "type": "scalar",
+    "unit": "unit",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -1,
+        "low": -1,
+        "high": 2,
+        "hihi": 2
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    },
+    "value": 1
+  },
+  "gate1Closed": {
+    "action": "reading",
+    "type": "scalar",
+    "unit": "unit",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -1,
+        "low": -1,
+        "high": 2,
+        "hihi": 2
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    },
+    "value": 0
+  },
+  "gate2Open": {
+    "action": "reading",
+    "type": "scalar",
+    "unit": "unit",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -1,
+        "low": -1,
+        "high": 2,
+        "hihi": 2
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    },
+    "value": 1
+  },
+  "gate2Closed": {
+    "action": "reading",
+    "type": "scalar",
+    "unit": "unit",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -1,
+        "low": -1,
+        "high": 2,
+        "hihi": 2
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    },
+    "value": 0
+  },
+  "openGate": {
+    "action": "setting",
+    "type": "scalar",
+    "unit": "unit",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -1,
+        "low": -1,
+        "high": 2,
+        "hihi": 2
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    },
+    "value": 1
   }
 }
