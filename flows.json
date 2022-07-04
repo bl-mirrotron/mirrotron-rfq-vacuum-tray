@@ -498,7 +498,7 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('lastAlarm', -1);",
         "finalize": "",
         "libs": [],
-        "x": 900,
+        "x": 1100,
         "y": 640,
         "wires": [
             [
@@ -710,7 +710,7 @@
             "45a97566b65c65cc",
             "05c0c7b4f59ca88d"
         ],
-        "x": 1055,
+        "x": 1255,
         "y": 600,
         "wires": []
     },
@@ -1630,7 +1630,7 @@
         "y": 640,
         "wires": [
             [
-                "99fbe8135d0ce161"
+                "48467ee1b54e0d4c"
             ]
         ]
     },
@@ -1671,7 +1671,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1120,
+        "x": 1320,
         "y": 680,
         "wires": [
             [
@@ -1693,7 +1693,7 @@
         "correl": "",
         "expiry": "",
         "broker": "79250bf3.365cc4",
-        "x": 1280,
+        "x": 1480,
         "y": 680,
         "wires": []
     },
@@ -1730,8 +1730,27 @@
         "links": [
             "04d132d87ffeb91a"
         ],
-        "x": 1055,
+        "x": 1255,
         "y": 640,
         "wires": []
+    },
+    {
+        "id": "48467ee1b54e0d4c",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "Check for Permit",
+        "func": "var tray = global.get('tray');\ntray.permit.value = 1;\nif (scalarAlarmScan(tray, 'reading')) tray.permit.value = 0;\nif (scalarAlarmScan(tray, 'setting')) tray.permit.value = 0;\n\nreturn msg;\nfunction getActionArray(tray, type, actionType)\n{\n    var actionArray = [];\n    var keys = Object.keys(tray);\n    for (var ii = 0; ii < keys.length; ++ii)\n    {\n        if (tray[keys[ii]].hasOwnProperty('type'))\n        {\n            if (tray[keys[ii]].type == type)\n            {\n                if (tray[keys[ii]].action == actionType)\n                {\n                    actionArray.push(tray[keys[ii]]);\n                }\n            }\n        }\n    }\n    return actionArray;\n}\nfunction scalarAlarmScan(tray, actionType)\n{\n    var alarmFlag = false;\n    var actionArray = getActionArray(tray, 'scalar', actionType);\n    if (actionArray.length > 0)\n    {\n        for (var ii = 0; ii < actionArray.length; ++ii)\n        {\n            actionArray[ii].alarm.value = 0;\n            if (!isNaN(actionArray[ii].value))\n            {\n                if (actionArray[ii].value <= actionArray[ii].alarm.limits.low)  actionArray[ii].alarm.value = 1;\n                if (actionArray[ii].value <= actionArray[ii].alarm.limits.lolo) actionArray[ii].alarm.value = 3;\n                if (actionArray[ii].value >= actionArray[ii].alarm.limits.high) actionArray[ii].alarm.value = 2;\n                if (actionArray[ii].value >= actionArray[ii].alarm.limits.hihi) actionArray[ii].alarm.value = 4;\n                if (actionArray[ii].alarm.value > 2) alarmFlag = true;\n            }\n        }\n    }\n    return alarmFlag;\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 640,
+        "wires": [
+            [
+                "99fbe8135d0ce161"
+            ]
+        ]
     }
 ]
