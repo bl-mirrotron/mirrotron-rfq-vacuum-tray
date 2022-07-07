@@ -503,7 +503,8 @@
         "wires": [
             [
                 "f5d0568e288098ed",
-                "ef7189156ac81e3c"
+                "ef7189156ac81e3c",
+                "bad8b154e55bac26"
             ],
             [
                 "9f8c3b4630e734a3"
@@ -1744,8 +1745,27 @@
         "links": [
             "4bddb9a0e424ebf4"
         ],
-        "x": 1445,
-        "y": 540,
+        "x": 1565,
+        "y": 560,
         "wires": []
+    },
+    {
+        "id": "bad8b154e55bac26",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "Check for turbo going down",
+        "func": "var tray = global.get('tray');\nturboState = context.get('turboState');\nlet downtransition = false;\nif ((tray.turboSpeed1.value == 0) && (turboState.turboSpeed1 == 1)) downtransition = true;\nif ((tray.turboSpeed2.value == 0) && (turboState.turboSpeed2 == 1)) downtransition = true;\nif ((tray.turboNoError1.value == 0) && (turboState.turboNoError1 == 1)) downtransition = true;\nif ((tray.turboNoError2.value == 0) && (turboState.turboNoError2 == 1)) downtransition = true;\nturboState.turboSpeed1 = tray.turboSpeed1.value;\nturboState.turboSpeed2 = tray.turboSpeed2.value;\nturboState.turboNoError1 = tray.turboNoError1.value;\nturboState.turboNoError2 = tray.turboNoError2.value;\nif (downtransition)\n{\n    if ((tray.gate1Open.value > 0 ) || (tray.gate2Open.value > 0 ) )\n    {\n        return {topic:'setting', payload:{cube:'openGate',value:0}};\n    }\n}\nreturn null;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nlet turboState = \n{\n    turboSpeed1 : 0,\n    turboSpeed2 : 0,\n    turboNoError1 : 0,\n    turboNoError2 : 0\n}\ncontext.set('turboState', turboState);",
+        "finalize": "",
+        "libs": [],
+        "x": 1360,
+        "y": 580,
+        "wires": [
+            [
+                "9f8cc473cc73f355"
+            ]
+        ]
     }
 ]
