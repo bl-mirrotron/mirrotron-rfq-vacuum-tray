@@ -492,8 +492,8 @@
         "type": "function",
         "z": "85e21fcb925ef32f",
         "name": "Readings Alarm Scan",
-        "func": "var newData = msg.payload;\nvar tray = global.get('tray');\nvar alarmFlagReading = scalarAlarmScan(tray, 'reading');\nvar alarmFlagSetting = scalarAlarmScan(tray, 'setting');\nvar newMsg   = null;\nvar alarmMsg = null;\nvar newSettingMsg = null;\nif (alarmFlagReading || alarmFlagSetting)\n{\n    alarmMsg = \n    {\n        topic: 'alarm',\n        payload: true\n    }\n}\nif (msg.topic == 'newSetting')\n{\n    newSettingMsg = \n    {\n        topic: 'newSetting',\n        payload: true\n    }\n};\nif (newData)\n{\n    newMsg = \n    {\n        topic: 'newData',\n        payload: true\n    }\n}\nif (alarmMsg != null ) newMsg = null;\nreturn [newMsg, newSettingMsg, alarmMsg];\n\nfunction getActionArray(tray, type, actionType)\n{\n    var actionArray = [];\n    var keys = Object.keys(tray);\n    for (var ii = 0; ii < keys.length; ++ii)\n    {\n        if (tray[keys[ii]].hasOwnProperty('type'))\n        {\n            if (tray[keys[ii]].type == type)\n            {\n                if (tray[keys[ii]].action == actionType)\n                {\n                    actionArray.push(tray[keys[ii]]);\n                }\n            }\n        }\n    }\n    return actionArray;\n}\nfunction scalarAlarmScan(tray, actionType)\n{\n    var alarmFlag = false;\n    var actionArray = getActionArray(tray, 'scalar', actionType);\n    if (actionArray.length > 0)\n    {\n        for (var ii = 0; ii < actionArray.length; ++ii)\n        {\n            let oldAlarmValue = actionArray[ii].alarm.value;\n            actionArray[ii].alarm.value = 0;\n            if (!isNaN(actionArray[ii].value))\n            {\n                if (actionArray[ii].value <= actionArray[ii].alarm.limits.low)  actionArray[ii].alarm.value = 1;\n                if (actionArray[ii].value <= actionArray[ii].alarm.limits.lolo) actionArray[ii].alarm.value = 3;\n                if (actionArray[ii].value >= actionArray[ii].alarm.limits.high) actionArray[ii].alarm.value = 2;\n                if (actionArray[ii].value >= actionArray[ii].alarm.limits.hihi) actionArray[ii].alarm.value = 4;\n                if (actionArray[ii].alarm.value != oldAlarmValue) alarmFlag = true;\n            }\n        }\n    }\n    return alarmFlag;\n}\n",
-        "outputs": 3,
+        "func": "var newData = msg.payload;\nvar tray = global.get('tray');\nvar alarmFlagReading = scalarAlarmScan(tray, 'reading');\nvar alarmFlagSetting = scalarAlarmScan(tray, 'setting');\nvar newMsg   = null;\nvar newSettingMsg = null;\nif (msg.topic == 'newSetting')\n{\n    newSettingMsg = \n    {\n        topic: 'newSetting',\n        payload: true\n    }\n};\nif (newData)\n{\n    newMsg = \n    {\n        topic: 'newData',\n        payload: true\n    }\n}\nreturn [newMsg, newSettingMsg];\n\nfunction getActionArray(tray, type, actionType)\n{\n    var actionArray = [];\n    var keys = Object.keys(tray);\n    for (var ii = 0; ii < keys.length; ++ii)\n    {\n        if (tray[keys[ii]].hasOwnProperty('type'))\n        {\n            if (tray[keys[ii]].type == type)\n            {\n                if (tray[keys[ii]].action == actionType)\n                {\n                    actionArray.push(tray[keys[ii]]);\n                }\n            }\n        }\n    }\n    return actionArray;\n}\nfunction scalarAlarmScan(tray, actionType)\n{\n    var alarmFlag = false;\n    var actionArray = getActionArray(tray, 'scalar', actionType);\n    if (actionArray.length > 0)\n    {\n        for (var ii = 0; ii < actionArray.length; ++ii)\n        {\n            let oldAlarmValue = actionArray[ii].alarm.value;\n            actionArray[ii].alarm.value = 0;\n            if (!isNaN(actionArray[ii].value))\n            {\n                if (actionArray[ii].value <= actionArray[ii].alarm.limits.low)  actionArray[ii].alarm.value = 1;\n                if (actionArray[ii].value <= actionArray[ii].alarm.limits.lolo) actionArray[ii].alarm.value = 3;\n                if (actionArray[ii].value >= actionArray[ii].alarm.limits.high) actionArray[ii].alarm.value = 2;\n                if (actionArray[ii].value >= actionArray[ii].alarm.limits.hihi) actionArray[ii].alarm.value = 4;\n                if (actionArray[ii].alarm.value != oldAlarmValue) alarmFlag = true;\n            }\n        }\n    }\n    return alarmFlag;\n}\n",
+        "outputs": 2,
         "noerr": 0,
         "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('lastAlarm', -1);",
         "finalize": "",
@@ -502,13 +502,11 @@
         "y": 640,
         "wires": [
             [
-                "f5d0568e288098ed"
+                "f5d0568e288098ed",
+                "ef7189156ac81e3c"
             ],
             [
                 "9f8c3b4630e734a3"
-            ],
-            [
-                "e490045da57dbc44"
             ]
         ]
     },
@@ -559,7 +557,8 @@
         "z": "85e21fcb925ef32f",
         "name": "blinkybus setting in",
         "links": [
-            "4493527757138cdc"
+            "4493527757138cdc",
+            "9f8cc473cc73f355"
         ],
         "x": 55,
         "y": 380,
@@ -706,12 +705,13 @@
         "type": "link out",
         "z": "85e21fcb925ef32f",
         "name": "Alarm Scan out",
+        "mode": "link",
         "links": [
             "45a97566b65c65cc",
-            "05c0c7b4f59ca88d"
+            "782a1b48b87cd876"
         ],
         "x": 1255,
-        "y": 600,
+        "y": 620,
         "wires": []
     },
     {
@@ -1640,7 +1640,7 @@
         "z": "85e21fcb925ef32f",
         "g": "24d6701c4857e25e",
         "name": "Create Setting",
-        "func": "var tray = global.get('tray');\nvar blinkyBusSettingMsg = \n{\n    topic : msg.topic, \n    payload : { value: msg.payload.value,  'address': -1  } \n}\nvar blinkyBusMessage = false;\nswitch(msg.payload.cube)\n{\n    case 'openGate':\n        blinkyBusSettingMsg.payload.address = 13;\n        blinkyBusMessage = true;\n        break;\n    case 'nonblinkyBusSetting':\n        tray.nonblinkyBusSetting.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        break;\n    default:\n        break;\n}\nvar msgArray = [null,null,null];\nif (blinkyBusMessage)\n{\n    global.set('settingInProgress',true);\n    var settingInProgressMsg = {topic:'settingInProgress', payload:true};\n    msgArray = [blinkyBusSettingMsg, settingInProgressMsg, null];\n    \n}\nelse\n{\n    global.set('settingInProgress',false);\n    msgArray = [null,null,{topic:'settingDone', payload:true}];\n}\nreturn msgArray;",
+        "func": "var tray = global.get('tray');\nvar blinkyBusSettingMsg = \n{\n    topic : msg.topic, \n    payload : { value: msg.payload.value,  'address': -1  } \n}\nvar blinkyBusMessage = false;\nswitch(msg.payload.cube)\n{\n    case 'openGate':\n        if ( (tray.gauge1.alarm.value > 2 ) || (tray.gauge2.alarm.value > 2 ) ) blinkyBusSettingMsg.payload.value = 0;\n        blinkyBusSettingMsg.payload.address = 13;\n        blinkyBusMessage = true;\n        break;\n    case 'nonblinkyBusSetting':\n        tray.nonblinkyBusSetting.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        break;\n    default:\n        break;\n}\nvar msgArray = [null,null,null];\nif (blinkyBusMessage)\n{\n    global.set('settingInProgress',true);\n    var settingInProgressMsg = {topic:'settingInProgress', payload:true};\n    msgArray = [blinkyBusSettingMsg, settingInProgressMsg, null];\n    \n}\nelse\n{\n    global.set('settingInProgress',false);\n    msgArray = [null,null,{topic:'settingDone', payload:true}];\n}\nreturn msgArray;",
         "outputs": 3,
         "noerr": 0,
         "initialize": "",
@@ -1659,43 +1659,6 @@
                 "1e34df4b19ff22cc"
             ]
         ]
-    },
-    {
-        "id": "e490045da57dbc44",
-        "type": "function",
-        "z": "85e21fcb925ef32f",
-        "name": "Alarm changed",
-        "func": "if (!msg.payload) return null;\nvar tray = global.get('tray');\nvar newMsg = \n{\n    topic: global.get('trayProps').box + '/' + global.get('trayProps').type + '/' + global.get('trayProps').name + '/reading',\n    payload: JSON.stringify(tray)\n};\nreturn  newMsg;  \n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1320,
-        "y": 680,
-        "wires": [
-            [
-                "e067291cdd1fd9f4"
-            ]
-        ]
-    },
-    {
-        "id": "e067291cdd1fd9f4",
-        "type": "mqtt out",
-        "z": "85e21fcb925ef32f",
-        "name": "QoS = 1",
-        "topic": "",
-        "qos": "1",
-        "retain": "false",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "79250bf3.365cc4",
-        "x": 1480,
-        "y": 680,
-        "wires": []
     },
     {
         "id": "3026811a11de85fd",
@@ -1731,7 +1694,7 @@
             "04d132d87ffeb91a"
         ],
         "x": 1255,
-        "y": 640,
+        "y": 660,
         "wires": []
     },
     {
@@ -1752,5 +1715,37 @@
                 "99fbe8135d0ce161"
             ]
         ]
+    },
+    {
+        "id": "ef7189156ac81e3c",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "Exhaust alarm",
+        "func": "var tray = global.get('tray');\nif ( (tray.gauge1.alarm.value > 2 ) || (tray.gauge2.alarm.value > 2 ) )\n{\n    if ((tray.gate1Open.value > 0 ) || (tray.gate2Open.value > 0 ) )\n    {\n        return {topic:'setting', payload:{cube:'openGate',value:0}};\n    }\n}\nreturn null;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1320,
+        "y": 540,
+        "wires": [
+            [
+                "9f8cc473cc73f355"
+            ]
+        ]
+    },
+    {
+        "id": "9f8cc473cc73f355",
+        "type": "link out",
+        "z": "85e21fcb925ef32f",
+        "name": "Exhaust Alarm out",
+        "mode": "link",
+        "links": [
+            "4bddb9a0e424ebf4"
+        ],
+        "x": 1445,
+        "y": 540,
+        "wires": []
     }
 ]
