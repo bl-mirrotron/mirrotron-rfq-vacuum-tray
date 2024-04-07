@@ -631,7 +631,7 @@
         "type": "function",
         "z": "85e21fcb925ef32f",
         "name": "Filter MQTT",
-        "func": "return {topic:msg.topic.split('/')[4], payload:msg.payload};",
+        "func": "return {topic:msg.topic.split('/')[5], payload:msg.payload};",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",

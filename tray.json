@@ -2,7 +2,7 @@
   "type": "rfq-vacuum",
   "name": "01",
   "arcPeriod": 60000,
-  "timeStamp": 1712513671667,
+  "timeStamp": 1712516932962,
   "watchdog": {
     "action": "reading",
     "type": "scalar",
@@ -10,8 +10,8 @@
     "alarm": {
       "value": 0,
       "limits": {
-        "lolo": 0,
-        "low": 0,
+        "lolo": -1,
+        "low": -1,
         "high": 32760,
         "hihi": 32760
       },
@@ -21,7 +21,7 @@
         "time": 0
       }
     },
-    "value": 3
+    "value": 34
   },
   "gauge1": {
     "action": "reading",
@@ -41,7 +41,7 @@
         "time": 0
       }
     },
-    "value": -0.679
+    "value": -0.65
   },
   "gauge2": {
     "action": "reading",
@@ -68,7 +68,7 @@
     "type": "scalar",
     "unit": "logPa",
     "alarm": {
-      "value": 2,
+      "value": 0,
       "limits": {
         "lolo": -6,
         "low": -5,
@@ -81,14 +81,14 @@
         "time": 0
       }
     },
-    "value": -3.592
+    "value": -4.474
   },
   "gauge4": {
     "action": "reading",
     "type": "scalar",
     "unit": "logPa",
     "alarm": {
-      "value": 2,
+      "value": 0,
       "limits": {
         "lolo": -6,
         "low": -5,
@@ -101,7 +101,7 @@
         "time": 0
       }
     },
-    "value": -3.629
+    "value": -4.518
   },
   "turboSpeed1": {
     "action": "reading",
@@ -188,7 +188,7 @@
     "type": "scalar",
     "unit": "unit",
     "alarm": {
-      "value": 3,
+      "value": 0,
       "limits": {
         "lolo": 0,
         "low": 0,
@@ -201,14 +201,14 @@
         "time": 0
       }
     },
-    "value": 0
+    "value": 1
   },
   "gate1Closed": {
     "action": "reading",
     "type": "scalar",
     "unit": "unit",
     "alarm": {
-      "value": 4,
+      "value": 0,
       "limits": {
         "lolo": -1,
         "low": -1,
@@ -221,14 +221,14 @@
         "time": 0
       }
     },
-    "value": 1
+    "value": 0
   },
   "gate2Open": {
     "action": "reading",
     "type": "scalar",
     "unit": "unit",
     "alarm": {
-      "value": 3,
+      "value": 0,
       "limits": {
         "lolo": 0,
         "low": 0,
@@ -241,14 +241,14 @@
         "time": 0
       }
     },
-    "value": 0
+    "value": 1
   },
   "gate2Closed": {
     "action": "reading",
     "type": "scalar",
     "unit": "unit",
     "alarm": {
-      "value": 4,
+      "value": 0,
       "limits": {
         "lolo": -1,
         "low": -1,
@@ -261,7 +261,7 @@
         "time": 0
       }
     },
-    "value": 1
+    "value": 0
   },
   "openGate": {
     "action": "setting",
@@ -286,10 +286,10 @@
   "permit": {
     "action": "reading",
     "type": "scalar",
-    "value": 0,
+    "value": 1,
     "unit": "",
     "alarm": {
-      "value": 3,
+      "value": 0,
       "limits": {
         "lolo": 0,
         "low": 0,
