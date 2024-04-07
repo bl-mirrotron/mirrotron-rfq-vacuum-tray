@@ -1,9 +1,9 @@
-MQTTSUBSCRIBE=mirrotron/rfq-vacuum/01/setting/#
+MQTTSUBSCRIBE=mirrotron-controls/tray/rfq-vacuum/01/setting/#
 MQTTCLIENTID=mirrotron-rfq-vacuum-tray-01
-MQTTSERVERIP=xxx
-MQTTUSERNAME=yyy
-MQTTPASSWORD=zzz
+MQTTSERVERIP=192.168.4.1
+MQTTUSERNAME=mirrotron-controls
+MQTTPASSWORD=xxxx
 SERIALPORT=/dev/ttyACM0
 SERIALBUFSIZE=30
 PM2NAME=mirrotron-rfq-vacuum
-NODEREDCONFIGSECRET=aaa
+NODEREDCONFIGSECRET=a-secret-key

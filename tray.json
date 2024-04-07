@@ -2,7 +2,7 @@
   "type": "rfq-vacuum",
   "name": "01",
   "arcPeriod": 60000,
-  "timeStamp": 1657976983961,
+  "timeStamp": 1712513671667,
   "watchdog": {
     "action": "reading",
     "type": "scalar",
@@ -21,7 +21,7 @@
         "time": 0
       }
     },
-    "value": 1
+    "value": 3
   },
   "gauge1": {
     "action": "reading",
@@ -41,7 +41,7 @@
         "time": 0
       }
     },
-    "value": -0.709
+    "value": -0.679
   },
   "gauge2": {
     "action": "reading",
@@ -61,7 +61,7 @@
         "time": 0
       }
     },
-    "value": -0.66
+    "value": -0.748
   },
   "gauge3": {
     "action": "reading",
@@ -81,7 +81,7 @@
         "time": 0
       }
     },
-    "value": -3.837
+    "value": -3.592
   },
   "gauge4": {
     "action": "reading",
@@ -101,7 +101,7 @@
         "time": 0
       }
     },
-    "value": -3.827
+    "value": -3.629
   },
   "turboSpeed1": {
     "action": "reading",
