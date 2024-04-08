@@ -1781,7 +1781,7 @@
         "type": "function",
         "z": "85e21fcb925ef32f",
         "name": "PostMortem",
-        "func": "var trayCopy = JSON.parse(JSON.stringify(global.get('tray')));\ntrayCopy['postMortem'] = msg.payload;\nvar newMsg = \n{\n    topic: global.get('trayProps').box + '/' + global.get('trayProps').type + '/' + global.get('trayProps').name + '/postMortem',\n    payload: JSON.stringify(trayCopy)\n};\nreturn  newMsg;  \n",
+        "func": "var trayCopy = JSON.parse(JSON.stringify(global.get('tray')));\ntrayCopy['postMortem'] = msg.payload;\nvar newMsg = \n{\n    topic: global.get('trayProps').box + '/tray/' + global.get('trayProps').type + '/' + global.get('trayProps').name + '/postMortem',\n    payload: JSON.stringify(trayCopy)\n};\nreturn  newMsg;  \n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('lastArchive', new Date().getTime());",
